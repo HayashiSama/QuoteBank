@@ -1,0 +1,9 @@
+<div>
+	<button class = "btn btn-info" (click)="cancelButton()" > Go Home </button>
+	<hr>
+	<h4> Add a New Author: </h4>
+	<input type="text" name="name" [(ngModel)]="name" > 
+	<button class="btn btn-info" (click)="cancelButton()" > Cancel </button>
+	<button class="btn btn-info" (click)="submitButton()" > Submit </button><br>
+	{{error}}
+</div>

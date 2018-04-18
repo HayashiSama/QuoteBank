@@ -1,0 +1,14 @@
+<div>  
+	<button class = "btn btn-info" (click)="addAuthor()"> Add an Author </button>
+	
+	<table class="table">
+		<tr>
+			<th> Author </th>
+			<th> Actions Available </th>
+		</tr>
+		<tr *ngFor="let author of authors">
+			<td> {{author.name}} </td>
+			<td> <button class="btn btn-info" (click)="viewQuotes(author)"> View Quotes </button> <button class="btn btn-info" (click)="editAuthor(author)"> Edit </button> </td>
+		</tr>
+	</table>
+</div>

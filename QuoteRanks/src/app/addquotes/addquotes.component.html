@@ -1,0 +1,12 @@
+<div>
+	
+	<button class = "btn btn-info" (click)="goHome()" > Go Home </button>
+	<hr>
+	<div *ngIf="current">
+		<h4> Add a New Quote: </h4>
+		<input type="text" name="quote" [(ngModel)]="quote" > 
+		<button class="btn btn-info" (click)="cancelButton()" > Cancel </button>
+		<button class="btn btn-info" (click)="submitButton()" > Submit </button><br>
+		{{error}}
+	</div>
+</div>

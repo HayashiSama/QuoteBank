@@ -1,0 +1,21 @@
+<div>  
+	<button class = "btn btn-info" (click)="addQuote()"> Add a Quote </button>
+	<button class = "btn btn-info" (click)="goHome()"> Go Home</button>
+	<hr>
+	
+	<div *ngIf="author">
+		<h6> Quotes by {{author.name}} </h6>
+		<table class="table">
+			<tr>
+				<th> Quotes </th>
+				<th> Votes </th>
+				<th> Actions Availalbe </th>
+			</tr>
+			<tr *ngFor="let quote of author.quotes">
+				<td> {{quote.quote}} </td>
+				<td> {{quote.votes}}</td>
+				<td> <button class="btn btn-info" (click)="upVote(author, quote)"> Vote Up </button> <button class="btn btn-info" (click)="downVote(author, quote)"> Vote Down </button> <button class="btn btn-info" (click)="deleteQuote(author, quote)"> Delete </button></td>
+			</tr>
+		</table>
+	</div>
+</div>
