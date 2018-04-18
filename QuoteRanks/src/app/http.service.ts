@@ -23,6 +23,8 @@ export class HttpService {
   	return this._http.put('/edit', {id: author._id, name: author.name})
   }
   addQuote(quote, author){
+  	console.log(quote)
+  	console.log(author)
   	return this._http.put('/addquote', {id: author._id, quote: quote})
 
   }

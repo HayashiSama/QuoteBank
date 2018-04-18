@@ -35,6 +35,7 @@ constructor(private _httpService: HttpService,
   submitButton(){
   	let obs = this._httpService.addQuote(this.quote, this.current);
   	obs.subscribe(data => {
+  		console.log(data)
   		if((data as any).message == "Success"){
   			this._router.navigate(['/list'])
   		}

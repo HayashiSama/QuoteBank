@@ -8,7 +8,7 @@ import { HttpService } from '../http.service';
   styleUrls: ['./listquotes.component.css']
 })
 export class ListquotesComponent implements OnInit {
-
+	
  constructor(
     private _route: ActivatedRoute,
     private _router: Router,

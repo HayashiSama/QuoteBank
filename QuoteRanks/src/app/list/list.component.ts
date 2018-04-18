@@ -14,7 +14,7 @@ export class ListComponent implements OnInit {
     private _router: Router,
     private _httpService: HttpService
   ) {}
-
+  
   authors = [];
   ngOnInit() {
   	this.getAuthors();
@@ -40,6 +40,10 @@ export class ListComponent implements OnInit {
   	this._httpService.viewauthor = author;
   	this._router.navigate(['/listquotes'])
 
+  }
+
+  goHome(){
+  	this._router.navigate(['/list'])
   }
 
 

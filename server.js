@@ -95,6 +95,7 @@ app.put('/edit', function(req, res){
 })
 
 app.delete('/deletequote/:id/:quote', function(req, res){
+
 	console.log("deleting author id: ", req.params.id)
 	Author.findOne({_id: req.params.id}, function(err, author){
 		if(err){
@@ -102,7 +103,8 @@ app.delete('/deletequote/:id/:quote', function(req, res){
 		}
 		else{
 			for(var i = 0; i < author.quotes.length; i++){
-				if(author.quotes[i].quote == req.body.quote){
+				if(author.quotes[i].quote == req.params.quote){
+					console.log("match found")
 					author.quotes.splice(i, 1);
 					author.markModified('quotes')
 					author.save(function(err){
@@ -121,33 +123,47 @@ app.delete('/deletequote/:id/:quote', function(req, res){
 })
 
 app.put('/addquote', function(req, res){
-	Author.findOne({_id: req.body.id}, function(err, author){
-		if(err){
-			console.log("error adding quote");
-			res.json({message: err});
-		}
-		else{
-			for(var i = 0; i < author.quotes.length; i++){
-				if(author.quotes[i].quote == req.body.quote){
-					res.json({message: "Quote already exists"})
-				}
-			
-				else{
-					author.quotes.push({quote: req.body.quote, votes: 0});
-					author.save(function(err){
-						if(err){
-							console.log("error saving after adding quote")
-							res.json({message: err});
-						}
-						else{
-							res.json({message: "Success"})
-						}
-					})
-				}
+	console.log(req.body)
+	var found = false;
+	if(req.body.quote.length < 3){
+		
+		res.json({message:"Error, quote must be at least 3 characters"})
+	}
+
+	else{
+		Author.findOne({_id: req.body.id}, function(err, author){
+			if(err){
+				console.log("error adding quote");
+				res.json({message: err});
 			}
-			
-		}
-	})
+			else{
+
+				for(var i = 0; i < author.quotes.length; i++){
+					if(author.quotes[i].quote == req.body.quote){
+						found = true;
+						res.json({message: "Quote already exists"})
+					}
+				}
+
+				if(!found){
+						console.log("new quote")
+						author.quotes.push({quote: req.body.quote, votes: 0});
+						author.markModified('quotes');
+						author.save(function(err){
+							if(err){
+								console.log("error saving after adding quote")
+								res.json({message: err});
+							}
+							else{
+								console.log("success adding")
+								res.json({message: "Success"})
+							}
+						})
+					}
+				
+			}
+		})
+	}
 })
 
 app.put('/vote', function(req, res){
